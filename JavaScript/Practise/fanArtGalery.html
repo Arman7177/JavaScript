@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fan Art Gallery | Night Pulse</title>
+  <link rel="stylesheet" href="fanArtGalery.css">
+  <link rel="icon" type="image/jpg" href="img/icon.jpg">
+</head>
+<body>
+  <section class="gallery-section">
+    <h1>🎨 Fan Art Gallery</h1>
+    <p class="subtitle">Explore amazing artwork created by Night Pulse fans worldwide</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="img/Art1.jpg" alt="Fan Art 1" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art2.jpg" alt="Fan Art 2" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art3.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art4.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art5.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art6.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art7.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art8.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art9.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art10.jpg" alt="Fan Art 3" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art11.jpg" alt="Fan Art 11" onclick="openLightbox(this)">
+      </div>
+      <div class="gallery-item">
+        <img src="img/Art12.jpg" alt="Fan Art 12" onclick="openLightbox(this)">
+      </div>
+      
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <img id="lightbox-img" src="" alt="Expanded Artwork">
+    </div>
+  </section>
+
+  <script>
+    function openLightbox(imgElement) {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = imgElement.src;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
