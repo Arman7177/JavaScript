@@ -1,0 +1,347 @@
+/* General HTML & Body Styles */
+html {
+    height: 100%;
+    overflow-y: auto; /* Allow vertical scrolling */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* A more elegant and readable font */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Sophisticated, muted blue-grey gradient */
+    background: linear-gradient(160deg, #1f273b 0%, #3a475f 100%);
+    color: #e0e0e0;
+    position: relative;
+    padding: 60px 0; /* More generous top/bottom padding */
+    overflow-x: hidden; /* Prevent horizontal scroll due to subtle transforms */
+}
+
+/* Abstract Background Grid/Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Subtle grid pattern for a tech-chic look */
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 25px 25px;
+    opacity: 0.1;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Floating Orb Light Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 15%;
+    left: 20%; /* Positioned off-center for dynamic feel */
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle at center, rgba(135, 206, 250, 0.2) 0%, rgba(135, 206, 250, 0) 70%); /* Soft blue glow */
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -2;
+    animation: floatLight 15s infinite ease-in-out;
+    transform-origin: 50% 50%; /* Ensures consistent animation */
+}
+
+/* Main Container: The Bank Application Panel */
+.container {
+    background: rgba(255, 255, 255, 0.08); /* More subtle transparency for elegance */
+    border-radius: 35px; /* Softer, more rounded corners */
+    padding: 50px 40px; /* More generous padding inside */
+    box-shadow:
+        0 35px 70px rgba(0, 0, 0, 0.6), /* Deeper, softer primary shadow */
+        inset 0 0 30px rgba(255, 255, 255, 0.03), /* Very subtle inner light for depth */
+        0 0 0 2px rgba(255, 255, 255, 0.05); /* Extremely thin, elegant border-like glow */
+    backdrop-filter: blur(25px) saturate(1.8) brightness(1.1); /* Enhanced glass effect */
+    -webkit-backdrop-filter: blur(25px) saturate(1.8) brightness(1.1);
+    width: 90%;
+    max-width: 600px; /* Slightly wider for a grander feel */
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* For any internal glow effects */
+    animation: panelSlideIn 1.2s ease-out forwards;
+    border: 1px solid rgba(255, 255, 255, 0.03); /* Faintest outer border */
+}
+
+/* Top Glow for the Container */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    border-radius: 5px;
+    filter: blur(3px);
+    opacity: 0.8;
+}
+
+/* Heading Styles */
+h2 {
+    font-family: 'Playfair Display', serif; /* Elegant serif font for titles */
+    font-size: 3.5em;
+    color: #ffffff;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.4);
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 1.8em;
+    color: #c0c0c0; /* Slightly muted for elegance */
+    margin-top: 35px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Thinner, more subtle separator */
+    padding-bottom: 10px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* Section Styling */
+.section {
+    background: rgba(0, 0, 0, 0.1); /* Very subtle background for sections */
+    border-radius: 20px; /* Softer section corners */
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4); /* Deeper inner shadow */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Fainter border */
+    transition: transform 0.3s ease-out;
+}
+
+.section:hover {
+    transform: translateY(-3px); /* Subtle lift on hover */
+}
+
+/* Input Field Styling */
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 24px); /* Account for padding */
+    padding: 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 12px; /* Softly rounded inputs */
+    background: rgba(255, 255, 255, 0.08); /* Transparent, elegant input background */
+    color: #ffffff;
+    font-size: 1.15em;
+    outline: none;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.4); /* Deeper inner shadow for inputs */
+    transition: all 0.3s ease;
+    text-align: center; /* Center placeholder/text for elegance */
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: #a0a0a0;
+    opacity: 0.8;
+    font-style: italic; /* Subtle italic for placeholders */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        inset 0 3px 8px rgba(0, 0, 0, 0.6),
+        0 0 0 4px rgba(0, 200, 255, 0.4); /* Softer, wider cyan focus glow */
+}
+
+/* Button Styling */
+button {
+    padding: 14px 30px;
+    margin: 8px; /* More spacing between buttons */
+    border: none;
+    border-radius: 40px; /* More circular buttons */
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(45deg, #007bff 0%, #00c6ff 100%); /* Base elegant blue */
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(255, 255, 255, 0.1);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, elegant transition */
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Specific button colors for distinct elegance */
+button:nth-of-type(1) { /* Create */
+    background: linear-gradient(45deg, #2ecc71 0%, #27ae60 100%); /* Elegant Green */
+}
+
+button:nth-of-type(2) { /* Deposit */
+    background: linear-gradient(45deg, #3498db 0%, #2980b9 100%); /* Elegant Blue */
+}
+
+button:nth-of-type(3) { /* Withdraw */
+    background: linear-gradient(45deg, #e74c3c 0%, #c0392b 100%); /* Elegant Red */
+}
+
+button:nth-of-type(4) { /* Show Balance */
+    background: linear-gradient(45deg, #9b59b6 0%, #8e44ad 100%); /* Elegant Purple */
+}
+
+button:nth-of-type(5) { /* Show Total */
+    background: linear-gradient(45deg, #f1c40f 0%, #f39c12 100%); /* Elegant Gold */
+    color: #333; /* Darker text for legibility on lighter button */
+}
+
+button:hover {
+    transform: translateY(-5px) scale(1.03); /* More pronounced, elegant lift */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 255, 255, 0.15);
+    filter: brightness(1.05); /* Subtle brightness */
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Subtle Hover Glow on Buttons */
+button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    z-index: 0; /* Ensures it's behind button text */
+}
+
+button:hover::before {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Result and Total Balance Display */
+#result, #totalBalance {
+    background: rgba(255, 255, 255, 0.05); /* Very subtle background for results */
+    border-radius: 15px;
+    padding: 18px;
+    margin-top: 30px;
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #f5f5f5;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    min-height: 25px; /* Ensures visual space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(5px); /* Light blur for result areas */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+#totalBalance {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.08) 100%);
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 12px #ffffff, 0 0 25px rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    animation: totalBalanceGlow 3s infinite alternate ease-in-out; /* Subtle pulsing glow */
+}
+
+/* --- Animations --- */
+@keyframes panelSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes floatLight {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+    33% { transform: translate(50px, -30px) scale(1.05); opacity: 0.25; }
+    66% { transform: translate(-50px, 40px) scale(0.98); opacity: 0.18; }
+    100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+}
+
+@keyframes totalBalanceGlow {
+    0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1); }
+    50% { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3); }
+    100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.1); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 30px;
+        border-radius: 28px;
+    }
+
+    h2 {
+        font-size: 2.8em;
+        margin-bottom: 30px;
+    }
+
+    h3 {
+        font-size: 1.6em;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        padding: 12px;
+        font-size: 1.05em;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 1em;
+        margin: 6px;
+    }
+
+    #result, #totalBalance {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    h2 {
+        font-size: 2.2em;
+    }
+
+    h3 {
+        font-size: 1.4em;
+    }
+
+    button {
+        display: block;
+        width: calc(100% - 16px); /* Adjusted for margin */
+        margin: 8px auto;
+    }
+
+    #result, #totalBalance {
+        font-size: 1.1em;
+    }
+}

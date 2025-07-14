@@ -1,0 +1,298 @@
+/* Importing Google Fonts for futuristic/tech aesthetic */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+
+/* General HTML & Body Styles */
+html {
+    height: 100%;
+    overflow-y: auto; /* Allow vertical scrolling if content overflows */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Clean, modern font for general text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Deep space background gradient */
+    background: linear-gradient(135deg, #0a0a2a 0%, #1a0a3a 50%, #0a0a2a 100%);
+    color: #e0e0e0;
+    position: relative;
+    overflow: hidden; /* Keep body hidden to avoid scrollbars from fixed elements */
+    perspective: 1200px; /* For 3D transformations */
+}
+
+/* Background Grid / Particle Effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Futuristic grid pattern */
+    background:
+        linear-gradient(90deg, rgba(30, 0, 60, 0.5) 1px, transparent 1px),
+        linear-gradient(rgba(30, 0, 60, 0.5) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
+    animation: backgroundPulse 10s infinite alternate ease-in-out;
+}
+
+/* Floating Light Orb / Aura */
+body::after {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle at center, rgba(100, 0, 255, 0.2) 0%, rgba(100, 0, 255, 0) 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(150px);
+    z-index: -2;
+    animation: lightFloat 12s infinite ease-in-out;
+    pointer-events: none;
+}
+
+/* Calculator Container */
+.calc {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.7), /* Deep, heavy shadow */
+        inset 0 0 30px rgba(255, 255, 255, 0.05), /* Subtle inner light */
+        0 0 0 5px rgba(255, 255, 255, 0.08); /* Faint outer border glow */
+    backdrop-filter: blur(20px) saturate(1.8) brightness(1.1); /* Strong glass effect */
+    -webkit-backdrop-filter: blur(20px) saturate(1.8) brightness(1.1);
+    width: 320px; /* Fixed width for consistent look */
+    transform-style: preserve-3d; /* Enable 3D for children */
+    transform: rotateX(10deg) rotateY(-5deg) translateZ(-50px); /* Initial subtle 3D tilt */
+    animation: calcEntrance 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bouncy entrance */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Very thin, sharp edge */
+}
+
+/* Display Screen */
+#display {
+    width: calc(100% - 20px); /* Adjust for padding */
+    height: 80px;
+    background: rgba(0, 0, 0, 0.3); /* Darker background for display */
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-family: 'Orbitron', monospace; /* Futuristic font for numbers */
+    font-size: 2.8em;
+    color: #00ffff; /* Bright cyan glow for numbers */
+    text-align: right;
+    box-shadow:
+        inset 0 5px 15px rgba(0, 0, 0, 0.6), /* Deep inner shadow */
+        0 0 20px rgba(0, 255, 255, 0.5); /* Outer glow for display */
+    outline: none;
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px rgba(0, 255, 255, 0.7); /* Layered text glow */
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px); /* Subtle blur for display */
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* Buttons Container */
+#buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 15px; /* Increased gap for better visual separation */
+}
+
+/* General Button Styling */
+button {
+    width: 65px; /* Fixed width for consistent button size */
+    height: 65px; /* Fixed height */
+    border-radius: 50%; /* Circular buttons */
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    background: linear-gradient(145deg, #2a2a4a 0%, #3a3a6a 100%); /* Dark, subtle gradient for numbers */
+    box-shadow:
+        5px 5px 10px rgba(0, 0, 0, 0.5), /* Outer shadow for lift */
+        inset -3px -3px 8px rgba(255, 255, 255, 0.1), /* Inner light from bottom-right */
+        inset 3px 3px 8px rgba(0, 0, 0, 0.3); /* Inner shadow from top-left */
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth, springy transition */
+    position: relative;
+    overflow: hidden; /* For ripple effect */
+    outline: none;
+}
+
+/* Button Hover & Active States (Press Effect) */
+button:hover {
+    transform: translateY(-3px) scale(1.05); /* Lift and slightly enlarge */
+    box-shadow:
+        8px 8px 15px rgba(0, 0, 0, 0.6),
+        inset -4px -4px 10px rgba(255, 255, 255, 0.15),
+        inset 4px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+button:active {
+    transform: translateY(0) scale(0.98); /* Press-in effect */
+    box-shadow:
+        inset 5px 5px 10px rgba(0, 0, 0, 0.6), /* Stronger inner shadow */
+        inset -3px -3px 8px rgba(255, 255, 255, 0.05),
+        2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle outer shadow when pressed */
+}
+
+/* Ripple Effect on Click */
+button::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3); /* White ripple */
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.4s ease-out, height 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+button:focus::after { /* Use :focus to trigger the animation */
+    width: 150px;
+    height: 150px;
+    opacity: 1;
+}
+
+
+/* Specific Button Colors & Styles */
+
+/* Operator Buttons */
+button:nth-child(4), /* / */
+button:nth-child(8), /* * */
+button:nth-child(12), /* + */
+button:nth-child(16) { /* - */
+    background: linear-gradient(145deg, #ff6b6b 0%, #ee3333 100%); /* Vibrant Red/Orange */
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Equals Button */
+button:nth-child(15) { /* = */
+    background: linear-gradient(145deg, #00ff99 0%, #00cc66 100%); /* Bright Green */
+    color: #0a0a0a; /* Dark text for contrast */
+    font-size: 2.2em; /* Larger equals symbol */
+    font-weight: 900;
+    grid-column: span 1; /* Ensure it takes one column */
+    box-shadow:
+        5px 5px 10px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(0, 255, 153, 0.7); /* Stronger glow */
+}
+
+/* Clear Button */
+button:nth-child(17) { /* C */
+    background: linear-gradient(145deg, #ffcc00 0%, #ffa500 100%); /* Yellow/Orange for Clear */
+    color: #333; /* Dark text for contrast */
+    font-weight: 700;
+    font-size: 1.8em;
+    grid-column: span 1; /* Ensure it takes one column */
+}
+
+/* Animations */
+@keyframes calcEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) rotateX(30deg) rotateY(-15deg) translateZ(-200px);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.05) rotateX(8deg) rotateY(-4deg) translateZ(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateX(10deg) rotateY(-5deg) translateZ(-50px);
+    }
+}
+
+@keyframes backgroundPulse {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.25; }
+    100% { opacity: 0.2; }
+}
+
+@keyframes lightFloat {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.2; }
+    25% { transform: translate(-45%, -55%) scale(1.05) rotate(5deg); opacity: 0.25; }
+    50% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.2; }
+    75% { transform: translate(-55%, -45%) scale(1.05) rotate(-5deg); opacity: 0.25; }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0.2; }
+}
+
+/* Responsive Design */
+@media (max-width: 450px) {
+    .calc {
+        width: 280px;
+        padding: 20px;
+        border-radius: 25px;
+    }
+
+    #display {
+        height: 70px;
+        font-size: 2.2em;
+        margin-bottom: 15px;
+    }
+
+    #buttons {
+        gap: 12px;
+    }
+
+    button {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3em;
+    }
+
+    button:nth-child(15) { /* = */
+        font-size: 2em;
+    }
+
+    button:nth-child(17) { /* C */
+        font-size: 1.6em;
+    }
+}
+
+@media (max-width: 350px) {
+    .calc {
+        width: 240px;
+        padding: 15px;
+        border-radius: 20px;
+    }
+
+    #display {
+        height: 60px;
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+
+    #buttons {
+        gap: 10px;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.1em;
+    }
+
+    button:nth-child(15) { /* = */
+        font-size: 1.8em;
+    }
+
+    button:nth-child(17) { /* C */
+        font-size: 1.4em;
+    }
+}

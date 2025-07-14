@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <title>Բանկային Համակարգ</title>
+  <link rel="stylesheet" href="Bank.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Բանկային Համակարգ</h2>
+
+  <div class="section">
+    <h3>Ստեղծել Հաշիվ</h3>
+    <input type="text" id="accNumber" placeholder="Հաշվի համարը">
+    <input type="text" id="accHolder" placeholder="Հաշվի տերը">
+    <input type="number" id="accBalance" placeholder="Մեկնարկային գումար">
+    <button onclick="createAccount()">Ստեղծել</button>
+  </div>
+
+  <div class="section">
+    <h3>Գործողություններ</h3>
+    <input type="text" id="targetAccount" placeholder="Հաշվի համարը">
+    <input type="number" id="amount" placeholder="Գումար">
+    <button onclick="deposit()">Մուտքագրել</button>
+    <button onclick="withdraw()">Հանել</button>
+    <button onclick="showBalance()">Տեսնել Մնացորդը</button>
+  </div>
+
+  <div class="section">
+    <h3>Ընդհանուր Բանկի Մնացորդ</h3>
+    <button onclick="showTotal()">Տեսնել Ընդհանուր Գումարը</button>
+    <p id="totalBalance"></p>
+  </div>
+
+  <div class="section">
+    <h3>Արդյունք</h3>
+    <p id="result"></p>
+  </div>
+</div>
+
+<script src="Bank.js"></script>
+
+</body>
+</html>

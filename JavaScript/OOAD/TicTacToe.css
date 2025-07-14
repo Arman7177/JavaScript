@@ -1,0 +1,350 @@
+/* General Body Styles */
+body {
+    font-family: 'Montserrat', sans-serif; /* A sharp, modern font */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Ultra-deep, almost cosmic background gradient */
+    background: linear-gradient(180deg, #0f0c29 0%, #302b63 60%, #24243e 100%);
+    color: #e0e0e0;
+    overflow: hidden;
+    perspective: 1500px; /* Enhanced 3D perspective */
+    position: relative; /* For ambient lighting */
+}
+
+/* Cosmic Particle Effect (Optional but powerful) */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGNpcmNsZSBjeD0iMTAwIiBjeT0iMTAwIiByPSIxIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC41Ii8+CiAgPGNpcmNsZSBjeD0iMjAiIGN5PSI0MCIgcj0iMC43IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC40Ii8+CiAgPGNpcmNsZSBjeD0iMTgwIiBjeT0iMTYwIiByPSIwLjgiIGZpbGw9IndoaXRlIiBvcGFjaXN0eT0iMC40NSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iMTIwIiByPSIwLjYiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjM1Ii8+CiAgPGNpcmNsZGUgY3g9IjE0MCIgY3k9IjgwIiByPSIwLjkiIGZpbGw9IndoaXRlIiBvcGFjaXQyPSIwLjU1Ii8+Cjwvc3ZnPg==');
+    background-size: 20px 20px; /* Small, sparse particles */
+    opacity: 0.1;
+    pointer-events: none;
+    animation: moveParticles 60s linear infinite; /* Slow, continuous movement */
+    z-index: -2; /* Below everything */
+}
+
+/* Ambient Light Source (subtle glow) */
+body::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle at center, rgba(135, 206, 250, 0.2) 0%, rgba(135, 206, 250, 0) 70%); /* Soft blue light */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    filter: blur(100px);
+    z-index: -1;
+    animation: pulseLight 8s infinite alternate ease-in-out;
+}
+
+/* Game Board Container */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 130px); /* Even larger cells */
+    grid-template-rows: repeat(3, 130px);
+    gap: 15px; /* More significant gap */
+    background: linear-gradient(150deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%); /* Ultra-subtle glass base */
+    border-radius: 30px; /* More pronounced rounded corners */
+    padding: 30px;
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.8), /* Extremely deep shadow */
+        inset 0 0 25px rgba(255, 255, 255, 0.03), /* Inner light reflection */
+        0 0 0 10px rgba(255, 255, 255, 0.05); /* Very subtle outer 'glow' */
+    backdrop-filter: blur(20px) saturate(1.8); /* Maximum blur and saturation for glass */
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    animation: entranceEffect 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* More dynamic, "bouncy" entry */
+    transform-style: preserve-3d;
+    transform: rotateX(15deg) rotateY(-8deg) translateZ(-50px); /* Deeper 3D initial tilt */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle, sharp edge */
+}
+
+/* Cell Styles */
+.cell {
+    width: 130px;
+    height: 130px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%); /* Cell background */
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5.5em; /* Even larger symbols */
+    font-weight: 800; /* Bolder */
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy transition */
+    user-select: none;
+    text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.9), /* Intense white core glow */
+        0 0 30px rgba(255, 255, 255, 0.6),
+        0 0 50px rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.5), /* Stronger inner shadow */
+        0 5px 15px rgba(0, 0, 0, 0.3); /* Subtle lift shadow */
+    transform-style: preserve-3d; /* For cell internal 3D effects */
+}
+
+/* Dynamic Edge Lighting on Cells */
+.cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+    /* Edge lighting effect - multi-color, radial at corners */
+    background: radial-gradient(circle at top left, #8aff8a 0%, transparent 70%),
+                radial-gradient(circle at top right, #ffb347 0%, transparent 70%),
+                radial-gradient(circle at bottom left, #ff6b6b 0%, transparent 70%),
+                radial-gradient(circle at bottom right, #8aff8a 0%, transparent 70%);
+    background-size: 50% 50%;
+    background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    opacity: 0;
+    filter: blur(15px); /* Stronger blur for glow */
+    transition: opacity 0.4s ease-out;
+    z-index: -1;
+}
+
+.cell:hover::before {
+    opacity: 1; /* Make the edge lighting visible on hover */
+}
+
+.cell:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.12) 100%);
+    transform: translateY(-8px) scale(1.05) rotateZ(2deg); /* More dramatic lift and rotation */
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6), /* Deeper shadow on hover */
+        inset 0 0 20px rgba(255, 255, 255, 0.05); /* Inner light */
+}
+
+.cell:active {
+    transform: translateY(0) scale(0.98) rotateZ(0deg); /* Press-in effect */
+    box-shadow:
+        inset 0 0 25px rgba(0, 0, 0, 0.8), /* Very strong inner shadow */
+        0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Specific styles for 'X' and 'O' with intense, evolving glows */
+.cell:not(:empty) {
+    cursor: default;
+}
+
+/* Player 'X' style */
+.cell[data-value="X"] {
+    color: #00e6e6; /* Brighter Cyan */
+    text-shadow:
+        0 0 10px #00e6e6,
+        0 0 25px #00e6e6,
+        0 0 45px #00e6e6,
+        0 0 70px rgba(0, 230, 230, 0.8); /* Deeper, wider glow */
+}
+
+/* Player 'O' style */
+.cell[data-value="O"] {
+    color: #e600e6; /* Brighter Magenta */
+    text-shadow:
+        0 0 10px #e600e6,
+        0 0 25px #e600e6,
+        0 0 45px #e600e6,
+        0 0 70px rgba(230, 0, 230, 0.8); /* Deeper, wider glow */
+}
+
+/* Status Message */
+#status {
+    margin-top: 50px;
+    font-size: 2.5em; /* Even larger status text */
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.9),
+        0 0 30px rgba(255, 255, 255, 0.6);
+    animation: popInText 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards; /* Bouncier text animation */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Restart Button */
+button {
+    margin-top: 60px;
+    padding: 20px 50px; /* Largest button size */
+    font-size: 1.6em; /* Largest button text */
+    font-weight: bold;
+    border: none;
+    border-radius: 70px; /* Very rounded */
+    /* More complex, multi-stop gradient with metallic sheen */
+    background: linear-gradient(45deg, #a77dff 0%, #7d44ff 30%, #5d22ff 70%, #3a00cc 100%);
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.6), /* Deep shadow for lift */
+        0 0 0 5px rgba(255, 255, 255, 0.1), /* Thin outer white border */
+        inset 0 0 15px rgba(255, 255, 255, 0.2); /* Inner light for volume */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy transition */
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Button Pulse and Glow on Hover */
+button::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    z-index: -1;
+}
+
+button:hover::before {
+    transform: scale(1);
+    opacity: 1;
+    animation: buttonPulse 1.5s infinite ease-out; /* Pulsing light effect */
+}
+
+button:hover {
+    background: linear-gradient(45deg, #3a00cc 0%, #5d22ff 30%, #7d44ff 70%, #a77dff 100%); /* Reverse, more intense gradient */
+    transform: translateY(-10px) rotateZ(-3deg); /* More extreme lift and rotation */
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.7), /* Even deeper shadow */
+        0 0 0 6px rgba(255, 255, 255, 0.2), /* Thicker outer glow */
+        inset 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+button:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.9), /* Maxed out press-in shadow */
+        0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Animations --- */
+@keyframes entranceEffect {
+    0% {
+        opacity: 0;
+        transform: scale(0.6) rotateX(45deg) rotateY(-20deg) translateZ(-200px);
+    }
+    70% {
+        opacity: 1;
+        transform: scale(1.05) rotateX(12deg) rotateY(-6deg) translateZ(0px); /* Slight overshoot */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateX(15deg) rotateY(-8deg) translateZ(-50px);
+    }
+}
+
+@keyframes popInText {
+    0% {
+        opacity: 0;
+        transform: scale(0.7) translateY(40px);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1) translateY(-5px); /* Bouncy effect */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.6; }
+}
+
+@keyframes moveParticles {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes pulseLight {
+    0% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    #game-board {
+        grid-template-columns: repeat(3, 90px);
+        grid-template-rows: repeat(3, 90px);
+        gap: 12px;
+        padding: 20px;
+        transform: rotateX(10deg) rotateY(0deg) translateZ(-30px);
+    }
+
+    .cell {
+        width: 90px;
+        height: 90px;
+        font-size: 3.8em;
+        border-radius: 18px;
+    }
+
+    #status {
+        font-size: 1.6em;
+        margin-top: 40px;
+    }
+
+    button {
+        padding: 14px 30px;
+        font-size: 1.2em;
+        margin-top: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    #game-board {
+        grid-template-columns: repeat(3, 70px);
+        grid-template-rows: repeat(3, 70px);
+        gap: 10px;
+        padding: 15px;
+        transform: rotateX(5deg) rotateY(0deg) translateZ(-20px);
+    }
+
+    .cell {
+        width: 70px;
+        height: 70px;
+        font-size: 3em;
+        border-radius: 15px;
+    }
+
+    #status {
+        font-size: 1.2em;
+        margin-top: 30px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 1em;
+        margin-top: 35px;
+    }
+}
