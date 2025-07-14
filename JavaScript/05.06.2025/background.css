@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #fceabb, #f8b500);
+    font-family: Arial, sans-serif;
+}
+
+#div {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border: 3px solid #333;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: background-color 0.4s, transform 0.3s;
+}
+
+#div:hover {
+    transform: scale(1.05);
+}
